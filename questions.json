@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1,
+    "question": "Which loop is guaranteed to execute at least once?",
+    "options": ["for", "while", "do-while", "for-each"],
+    "answer": "do-while",
+    "category": "Basic: loop/ for-each",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+  },
+  {
+    "id": 2,
+    "question": "In a for-each loop, what can you NOT easily do?",
+    "options": ["Access the current element", "Iterate over an ArrayList", "Access the current index", "Iterate over an array"],
+    "answer": "Access the current index",
+    "category": "Basic: loop/ for-each",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+  },
+  {
+    "id": 3,
+    "question": "What happens if you remove an item from a list while iterating over it with a for-each loop?",
+    "options": ["It works fine", "ConcurrentModificationException", "The loop skips an element", "NullPointerException"],
+    "answer": "ConcurrentModificationException",
+    "category": "Basic: loop/ for-each",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+  },
+  {
+    "id": 4,
+    "question": "In 'for(int i=0; i<5; i++)', which part is the termination condition?",
+    "options": ["int i=0", "i<5", "i++", "The body"],
+    "answer": "i<5",
+    "category": "Basic: loop/ for-each",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+  },
+  {
+    "id": 5,
+    "question": "Which loop is best for iterating over all elements of a collection without needing an index?",
+    "options": ["while", "standard for", "for-each", "do-while"],
+    "answer": "for-each",
+    "category": "Basic: loop/ for-each",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+  },
+  {
+    "id": 6,
+    "question": "How are primitive types passed in Java?",
+    "options": ["By Reference", "By Value", "By Address", "By Proxy"],
+    "answer": "By Value",
+    "category": "Basic: Method/parameter passing",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+  },
+  {
+    "id": 7,
+    "question": "When passing an object to a method, what is passed by value?",
+    "options": ["A full copy of the object", "The memory reference to the object", "The object's class", "Nothing"],
+    "answer": "The memory reference to the object",
+    "category": "Basic: Method/parameter passing",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+  },
+  {
+    "id": 8,
+    "question": "What is method overloading?",
+    "options": ["Two methods with same name and different parameters", "A method calling itself", "A subclass redefining a parent method", "A method with no return type"],
+    "answer": "Two methods with same name and different parameters",
+    "category": "Basic: Method/parameter passing",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+  },
+  {
+    "id": 9,
+    "question": "What keyword is used to stop a method and send a value back?",
+    "options": ["break", "stop", "return", "exit"],
+    "answer": "return",
+    "category": "Basic: Method/parameter passing",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+  },
+  {
+    "id": 10,
+    "question": "What does a 'void' return type mean?",
+    "options": ["The method returns null", "The method returns an empty object", "The method returns nothing", "The method returns 0"],
+    "answer": "The method returns nothing",
+    "category": "Basic: Method/parameter passing",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+  },
+  {
+    "id": 11,
+    "question": "Which follows Boolean Zen?",
+    "options": ["if (isReady == true)", "if (isReady)", "if (isReady != false)", "if (isReady == !false)"],
+    "answer": "if (isReady)",
+    "category": "Basic: If-else/Boolean zen",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 12,
+    "question": "What is the result of (true || false)?",
+    "options": ["true", "false", "null", "error"],
+    "answer": "true",
+    "category": "Basic: If-else/Boolean zen",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 13,
+    "question": "What is short-circuit evaluation in (A && B)?",
+    "options": ["If A is true, B is not checked", "If A is false, B is not checked", "Both are always checked", "B is checked first"],
+    "answer": "If A is false, B is not checked",
+    "category": "Basic: If-else/Boolean zen",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 14,
+    "question": "Which operator is the logical NOT?",
+    "options": ["&", "!", "~", "|"],
+    "answer": "!",
+    "category": "Basic: If-else/Boolean zen",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 15,
+    "question": "What is the result of returning (x > 0) instead of using if-else to return true/false?",
+    "options": ["More efficient but harder to read", "Boolean Zen", "Incorrect syntax", "A compile error"],
+    "answer": "Boolean Zen",
+    "category": "Basic: If-else/Boolean zen",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 16,
+    "question": "What is the index of the first element in an array?",
+    "options": ["1", "0", "-1", "Any number"],
+    "answer": "0",
+    "category": "Arrays/ArrayList",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 17,
+    "question": "How do you get the length of a standard array 'arr'?",
+    "options": ["arr.size()", "arr.length()", "arr.length", "arr.count"],
+    "answer": "arr.length",
+    "category": "Arrays/ArrayList",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 18,
+    "question": "Which of these allows dynamic resizing?",
+    "options": ["int[]", "ArrayList", "String[]", "double[]"],
+    "answer": "ArrayList",
+    "category": "Arrays/ArrayList",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 19,
+    "question": "What is the method to add an element to an ArrayList?",
+    "options": ["put()", "push()", "insert()", "add()"],
+    "answer": "add()",
+    "category": "Arrays/ArrayList",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 20,
+    "question": "How do you access the element at index 2 in an ArrayList 'list'?",
+    "options": ["list[2]", "list.get(2)", "list.at(2)", "list(2)"],
+    "answer": "list.get(2)",
+    "category": "Arrays/ArrayList",
+    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+  },
+  {
+    "id": 21,
+    "question": "Which keyword refers to the current object instance?",
+    "options": ["super", "self", "this", "current"],
+    "answer": "this",
+    "category": "Classes",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 22,
+    "question": "What is the purpose of a constructor?",
+    "options": ["To destroy an object", "To initialize object state", "To define a method", "To inherit from a class"],
+    "answer": "To initialize object state",
+    "category": "Classes",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 23,
+    "question": "Why use 'private' for instance variables?",
+    "options": ["To save memory", "To speed up code", "Encapsulation", "It's required by Java"],
+    "answer": "Encapsulation",
+    "category": "Classes",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 24,
+    "question": "Which access modifier makes a field visible only in its own class?",
+    "options": ["public", "protected", "private", "default"],
+    "answer": "private",
+    "category": "Classes",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 25,
+    "question": "Where are instance variables declared?",
+    "options": ["Inside a method", "Outside methods, inside the class", "Inside the main method", "In a separate file"],
+    "answer": "Outside methods, inside the class",
+    "category": "Classes",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 26,
+    "question": "Which keyword is used for class inheritance?",
+    "options": ["implements", "inherits", "extends", "uses"],
+    "answer": "extends",
+    "category": "Inheritance/interfaces",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 27,
+    "question": "Which keyword is used to implement an interface?",
+    "options": ["extends", "implements", "inherits", "includes"],
+    "answer": "implements",
+    "category": "Inheritance/interfaces",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 28,
+    "question": "What is method overriding?",
+    "options": ["Same name, different params in one class", "Subclass redefining a method from superclass", "Defining multiple constructors", "Calling super()"],
+    "answer": "Subclass redefining a method from superclass",
+    "category": "Inheritance/interfaces",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 29,
+    "question": "How do you call a parent class constructor?",
+    "options": ["parent()", "this()", "super()", "base()"],
+    "answer": "super()",
+    "category": "Inheritance/interfaces",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 30,
+    "question": "Can a class extend multiple classes in Java?",
+    "options": ["Yes", "No", "Only if they are abstract", "Only if they are final"],
+    "answer": "No",
+    "category": "Inheritance/interfaces",
+    "tip": "Relevant CS211 Chapters: Ch09 Review"
+  },
+  {
+    "id": 31,
+    "question": "What is the key characteristic of a HashSet?",
+    "options": ["Preserves order", "Allows duplicates", "No duplicates", "Allows index access"],
+    "answer": "No duplicates",
+    "category": "Java Collections Framework -HashSet",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+  },
+  {
+    "id": 32,
+    "question": "What is the average time complexity for HashSet.contains()?",
+    "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)"],
+    "answer": "O(1)",
+    "category": "Java Collections Framework -HashSet",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+  },
+  {
+    "id": 33,
+    "question": "Does HashSet guarantee insertion order?",
+    "options": ["Yes", "No", "Only for integers", "Only for strings"],
+    "answer": "No",
+    "category": "Java Collections Framework -HashSet",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+  },
+  {
+    "id": 34,
+    "question": "What happens if you add a duplicate to a HashSet?",
+    "options": ["It throws an error", "It overwrites the old one", "The set remains unchanged", "It creates a list inside"],
+    "answer": "The set remains unchanged",
+    "category": "Java Collections Framework -HashSet",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+  },
+  {
+    "id": 35,
+    "question": "Which methods are essential for objects used in a HashSet?",
+    "options": ["toString and equals", "hashCode and equals", "compareTo and equals", "clone and equals"],
+    "answer": "hashCode and equals",
+    "category": "Java Collections Framework -HashSet",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+  },
+  {
+    "id": 36,
+    "question": "What does a HashMap store?",
+    "options": ["A list of values", "Key-Value pairs", "Unique items only", "Ordered items"],
+    "answer": "Key-Value pairs",
+    "category": "Java Collections Framework -HashMap",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+  },
+  {
+    "id": 37,
+    "question": "What is the method to retrieve a value from a HashMap?",
+    "options": ["get(index)", "get(key)", "find(key)", "value(key)"],
+    "answer": "get(key)",
+    "category": "Java Collections Framework -HashMap",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+  },
+  {
+    "id": 38,
+    "question": "What happens if you 'put' a value using a key that already exists?",
+    "options": ["It adds a second entry", "It throws an error", "It replaces the old value", "It is ignored"],
+    "answer": "It replaces the old value",
+    "category": "Java Collections Framework -HashMap",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+  },
+  {
+    "id": 39,
+    "question": "Can a HashMap have duplicate values?",
+    "options": ["No", "Yes", "Only if keys are different", "Only if values are unique"],
+    "answer": "Yes",
+    "category": "Java Collections Framework -HashMap",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+  },
+  {
+    "id": 40,
+    "question": "What is the method to check if a key exists in a HashMap?",
+    "options": ["hasKey()", "exists()", "containsKey()", "contains()"],
+    "answer": "containsKey()",
+    "category": "Java Collections Framework -HashMap",
+    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+  }
+]
