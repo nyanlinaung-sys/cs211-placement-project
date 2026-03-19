@@ -50,7 +50,7 @@ def check_passing_status(category_scores):
         if high_scores < rules["min_pass_count"]:
             all_groups_passed = False 
 
-    return "Pass" if all_groups_passed else "Advice"
+    return "Pass" if all_groups_passed else "Pass with Review"
 
 def calculate_results(user_answers, questions):
     raw_correct = 0
@@ -88,10 +88,14 @@ def calculate_results(user_answers, questions):
 def get_multi_label_prediction(row_data):
     csv_file = 'student_training_data.csv'
     feature_cols = [
-        "Basic: loop/ for-each", "Basic: Method/parameter passing", 
-        "Basic: If-else/Boolean zen", "Arrays/ArrayList",
-        "Classes", "Inheritance/interfaces", 
-        "Java Collections Framework -HashSet", "Java Collections Framework -HashMap"
+    "Basic: loop/ for-each", 
+    "Basic: Method/parameter passing", 
+    "Basic: If-else/Boolean zen", 
+    "Arrays/ArrayList",
+    "Classes", 
+    "Inheritance/interfaces", 
+    "Java Collections Framework -HashSet", 
+    "Java Collections Framework -HashMap"
     ]
     target_cols = [f"T_{col}" for col in feature_cols]
 

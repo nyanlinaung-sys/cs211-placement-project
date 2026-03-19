@@ -8,9 +8,22 @@ from logic import load_questions, calculate_results, get_multi_label_prediction
 DEV_MODE = True  
 FORM_ID = "1Yj8KtJ-Nb4Yf856vC5tFXPIc6OXvkrxmzBWVRmCJNzY"
 
+# 1. EXACT COLUMN ORDER FOR AI TRAINING (Matches the CSV)
+FEATURE_COLS = [
+    "Basic: loop/ for-each", 
+    "Basic: Method/parameter passing", 
+    "Basic: If-else/Boolean zen", 
+    "Arrays/ArrayList",
+    "Classes", 
+    "Inheritance/interfaces", 
+    "Java Collections Framework -HashSet", 
+    "Java Collections Framework -HashMap"
+]
+TARGET_COLS = [f"T_{c}" for c in FEATURE_COLS]
+ALL_TRAINING_COLS = FEATURE_COLS + TARGET_COLS
+
 st.set_page_config(page_title="CS211 Placement Test", page_icon="🧠", layout="wide")
 
-# 1. Initialize Session State
 if 'quiz_started' not in st.session_state:
     st.session_state.quiz_started = False
     st.session_state.current_q = 0 
@@ -18,16 +31,13 @@ if 'quiz_started' not in st.session_state:
     st.session_state.quiz_complete = False
     st.session_state.student_name = ""
     st.session_state.student_id = ""
-    st.session_state.data_sent = False  # FIX: Gatekeeper to prevent duplicates
+    st.session_state.data_sent = False 
 
 questions = load_questions()
 total_questions = len(questions)
 
-# --- CLOUD SYNC FUNCTION ---
 def send_to_google_sheets(sid, name, score, status):
-    # This specific URL format is required for background POST requests
-    url = f"https://docs.google.com/forms/d/1Yj8KtJ-Nb4Yf856vC5tFXPIc6OXvkrxmzBWVRmCJNzY/formResponse"
-    
+    url = f"https://docs.google.com/forms/d/e/1FAIpQLSeJjxjL3WoG6NODAhdFS_RVjdHN3KGsIdag9Y71fxsDytyZAQ/formResponse"
     payload = {
         "entry.2042537524": sid,    
         "entry.1764834092": name,   
@@ -35,19 +45,15 @@ def send_to_google_sheets(sid, name, score, status):
         "entry.1434025782": status  
     }
     try:
-        # We use a POST request to "submit" the form silently
         r = requests.post(url, data=payload, timeout=5)
-        # A status code of 200 means Google accepted the data
         return r.status_code == 200
-    except Exception as e:
-        print(f"Sync Error: {e}")
+    except:
         return False
 
 # --- UI LOGIC ---
 st.title("CS211 Placement Test")
 st.subheader("Department of Computer Science, Bellevue College")
 
-# A. WELCOME SCREEN
 if not st.session_state.quiz_started:
     with st.container(border=True):
         st.subheader("Candidate Registration")
@@ -62,17 +68,13 @@ if not st.session_state.quiz_started:
             else:
                 st.error("Please enter both ID and Name.")
 
-# B. QUIZ SCREEN
 elif not st.session_state.quiz_complete:
     q_index = st.session_state.current_q
     q = questions[q_index]
-
     st.write(f"Candidate: **{st.session_state.student_name}** ({st.session_state.student_id})")
     st.subheader(f"Question {q_index + 1} of {total_questions}")
     st.progress(q_index / total_questions) 
-
     st.markdown(f"### {q['question']}")
-    
     if q.get("image"):
         try:
             st.image(q["image"], caption="Analyze this code snippet", width=400)
@@ -91,66 +93,58 @@ elif not st.session_state.quiz_complete:
             st.session_state.quiz_complete = True
             st.rerun()
 
-# C. RESULTS PAGE
 else:
     points, feedback, cat_scores, status = calculate_results(st.session_state.answers, questions) 
 
-    # --- FIX: DATA SYNC WITH DUPLICATE PROTECTION ---
+    # 1. Sync to Google
     if not st.session_state.data_sent:
-        with st.spinner("Syncing results to professor's records..."):
-            success = send_to_google_sheets(st.session_state.student_id, st.session_state.student_name, points, status)
-            if success:
-                st.session_state.data_sent = True
-                st.toast("Results successfully recorded!", icon="✅")
-            else:
-                st.error("Cloud sync failed. Please take a screenshot of your score.")
+        success = send_to_google_sheets(st.session_state.student_id, st.session_state.student_name, points, status)
+        if success:
+            st.session_state.data_sent = True
+            st.toast("Recorded in Cloud!", icon="✅")
 
-    # 3. Prepare data for AI model
-    row_data = {cat: data['correct'] * 2 for cat, data in cat_scores.items()}
-
-    with st.spinner("AI is analyzing study focus areas..."):
+    # 2. AI Prediction
+    row_data = {cat: cat_scores.get(cat, {'correct': 0})['correct'] * 2 for cat in FEATURE_COLS}
+    with st.spinner("AI analyzing focus areas..."):
         recommended_plans = get_multi_label_prediction(row_data)
 
-    # 4. Local CSV backup
-    save_data = row_data.copy()
-    save_data['student_id'] = st.session_state.student_id
-    save_data['student_name'] = st.session_state.student_name
-    df_new = pd.DataFrame([save_data])
-    df_new.to_csv('student_training_data.csv', mode='a', index=False, header=not os.path.exists('student_training_data.csv'))
+    # 3. FIXED: SAVE WITH FORCED COLUMN ORDER
+    training_dict = {}
+    for cat in FEATURE_COLS:
+        score = cat_scores.get(cat, {'correct': 0})['correct'] * 2
+        training_dict[cat] = score
+        training_dict[f"T_{cat}"] = 1 if score < 8 else 0
+
+    # This 'columns' argument ensures the row matches the CSV file exactly
+    df_training = pd.DataFrame([training_dict], columns=ALL_TRAINING_COLS)
+    df_training.to_csv('student_training_data.csv', mode='a', index=False, header=not os.path.exists('student_training_data.csv'))
     
-    # 5. UI DISPLAY
-    st.header(f"Final Score: {points} / 80 Points")
+    # 4. UI Display
+    st.header(f"Final Score: {points} / 80")
     col1, col2 = st.columns([1, 1.2]) 
-    
     with col1:
-        st.subheader("Results by Category")
-        for cat, data in cat_scores.items():
-            st.write(f"**{cat}**: {data['correct']} / {data['total']} Correct")
+        st.subheader("Category Breakdown")
+        for cat in FEATURE_COLS:
+            data = cat_scores.get(cat, {'correct': 0, 'total': 0})
+            st.write(f"**{cat}**: {data['correct']} / {data['total']}")
             st.progress(data['correct'] / data['total'] if data['total'] > 0 else 0)
 
     with col2:
-        st.subheader("Enrollment Status")
+        st.subheader("PlacementResult")
         if status == "Reject":
-            st.error("### ❌ Status: REJECT")
-            st.warning("Requirements for CS211 not met.")
+            st.error("Status: REJECT")
         else:
-            if status == "Pass":
-                st.success("### ✅ Status: PASS")
-                st.balloons()
-            else: 
-                st.warning("### ⚠️ Status: ADVICE")
-            
+            st.success(f"Status: {status}")
             st.write("---")
-            st.subheader("AI Optimized Study Plan")
-            for cat, data in cat_scores.items():
-                if data['correct'] < data['total']:
+            st.subheader("AI Study Recommendations For CS211")
+            for cat in FEATURE_COLS:
+                if cat_scores.get(cat, {'correct': 0})['correct'] < cat_scores.get(cat, {'total': 2})['total']:
                     with st.container(border=True):
-                        st.markdown(f"**Focus Area: {cat}**")
-                        tip = next((q_obj['tip'] for q_obj in questions if q_obj['category'] == cat), "Review notes.")
+                        st.markdown(f"**Focus: {cat}**")
+                        tip = next((q['tip'] for q in questions if q['category'] == cat), "Review core concepts.")
                         st.info(f"💡 {tip}")
 
     if st.button("Restart Quiz"):
-        # Reset everything
         for key in list(st.session_state.keys()):
             del st.session_state[key]
         st.rerun()
