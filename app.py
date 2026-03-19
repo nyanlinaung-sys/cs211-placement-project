@@ -5,7 +5,7 @@ import requests
 from logic import load_questions, calculate_results, get_multi_label_prediction
 
 # --- CONFIGURATION ---
-DEV_MODE = True  # Set to False before final submission to professor
+DEV_MODE = True  
 FORM_ID = "1Yj8KtJ-Nb4Yf856vC5tFXPIc6OXvkrxmzBWVRmCJNzY"
 
 st.set_page_config(page_title="CS211 Placement Test", page_icon="🧠", layout="wide")
@@ -18,24 +18,30 @@ if 'quiz_started' not in st.session_state:
     st.session_state.quiz_complete = False
     st.session_state.student_name = ""
     st.session_state.student_id = ""
+    st.session_state.data_sent = False  # FIX: Gatekeeper to prevent duplicates
 
 questions = load_questions()
 total_questions = len(questions)
 
 # --- CLOUD SYNC FUNCTION ---
 def send_to_google_sheets(sid, name, score, status):
-    url = f"https://docs.google.com/forms/d/e/1Yj8KtJ-Nb4Yf856vC5tFXPIc6OXvkrxmzBWVRmCJNzY/formResponse"
-    # !!! IMPORTANT: entry numbers with actual Google Form IDs !!!
+    # This specific URL format is required for background POST requests
+    url = f"https://docs.google.com/forms/d/1Yj8KtJ-Nb4Yf856vC5tFXPIc6OXvkrxmzBWVRmCJNzY/formResponse"
+    
     payload = {
-        "entry.2042537524": sid,    # Student ID ID
-        "entry.1764834092": name,   # Name ID
-        "entry.1723464832": str(score), # Score ID
-        "entry.1434025782": status  # Status ID
+        "entry.2042537524": sid,    
+        "entry.1764834092": name,   
+        "entry.1723464832": str(score), 
+        "entry.1434025782": status  
     }
     try:
-        requests.post(url, data=payload, timeout=5)
-    except:
-        pass # Prevents app crash if internet blips
+        # We use a POST request to "submit" the form silently
+        r = requests.post(url, data=payload, timeout=5)
+        # A status code of 200 means Google accepted the data
+        return r.status_code == 200
+    except Exception as e:
+        print(f"Sync Error: {e}")
+        return False
 
 # --- UI LOGIC ---
 st.title("CS211 Placement Test")
@@ -73,9 +79,7 @@ elif not st.session_state.quiz_complete:
         except:
             st.error("Image file not found.")
 
-    # Auto-select answer if in DEV_MODE
     default_index = q["options"].index(q["answer"]) if DEV_MODE else None
-
     user_choice = st.radio("Select your answer:", q["options"], index=default_index, key=f"q_{q_index}")
     
     if st.button("Next Question" if q_index < total_questions - 1 else "Finish Quiz"):
@@ -89,20 +93,25 @@ elif not st.session_state.quiz_complete:
 
 # C. RESULTS PAGE
 else:
-    # 1. Calculate Results using logic.py
     points, feedback, cat_scores, status = calculate_results(st.session_state.answers, questions) 
 
-    # 2. Sync to Google Sheets
-    send_to_google_sheets(st.session_state.student_id, st.session_state.student_name, points, status)
+    # --- FIX: DATA SYNC WITH DUPLICATE PROTECTION ---
+    if not st.session_state.data_sent:
+        with st.spinner("Syncing results to professor's records..."):
+            success = send_to_google_sheets(st.session_state.student_id, st.session_state.student_name, points, status)
+            if success:
+                st.session_state.data_sent = True
+                st.toast("Results successfully recorded!", icon="✅")
+            else:
+                st.error("Cloud sync failed. Please take a screenshot of your score.")
 
-    # 3. Prepare data for AI model (Must match logic.py feature_cols exactly)
-    # Scales scores to 10-point scale for the AI model
+    # 3. Prepare data for AI model
     row_data = {cat: data['correct'] * 2 for cat, data in cat_scores.items()}
 
     with st.spinner("AI is analyzing study focus areas..."):
         recommended_plans = get_multi_label_prediction(row_data)
 
-    # 4. Save to local CSV (for AI training backup)
+    # 4. Local CSV backup
     save_data = row_data.copy()
     save_data['student_id'] = st.session_state.student_id
     save_data['student_name'] = st.session_state.student_name
@@ -133,7 +142,6 @@ else:
             
             st.write("---")
             st.subheader("AI Optimized Study Plan")
-            # Only show focus areas if user didn't get 100% in that category
             for cat, data in cat_scores.items():
                 if data['correct'] < data['total']:
                     with st.container(border=True):
@@ -142,6 +150,7 @@ else:
                         st.info(f"💡 {tip}")
 
     if st.button("Restart Quiz"):
+        # Reset everything
         for key in list(st.session_state.keys()):
             del st.session_state[key]
         st.rerun()
