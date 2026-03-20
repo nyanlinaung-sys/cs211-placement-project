@@ -1,4 +1,4 @@
-streamlit
+streamlit==1.32.0git status
 pandas
-scikit-learn
 requests
+scikit-learn
