@@ -19,7 +19,7 @@ RUN pip3 install -r requirements.txt
 COPY . .
 
 # 6. Tell AWS to open the port Streamlit uses
-EXPOSE 8501
+EXPOSE 8080
 
 # 7. The command to start your app
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0"]
