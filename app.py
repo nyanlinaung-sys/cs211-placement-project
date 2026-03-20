@@ -4,11 +4,84 @@ import os
 import requests
 from logic import load_questions, calculate_results, get_multi_label_prediction
 
-# --- CONFIGURATION ---
+# --- 1. WEB DESIGN (CSS) ---
+st.set_page_config(page_title="CS211 Placement Test", page_icon="🧠", layout="wide")
+
+st.markdown("""
+    <style>
+    /* 1. Tighten the Layout */
+    .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: 0rem !important;
+    }
+
+    /* 2. Background */
+    .stApp {
+        background-color: #F8FAFC;
+    }
+    
+    /* 3. Header - Sleek & Smaller */
+    .main-header {
+        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+        padding: 30px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        margin-bottom: 15px; /* Reduced gap */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* 4. Fix Labels - Bold & Dark Blue */
+    label, p, .stMarkdown {
+        color: #1E293B !important; 
+        font-weight: 700 !important;
+        margin-bottom: 2px !important; /* Tightens gap between label and box */
+    }
+    
+    /* Fix the "Candidate Registration" text specifically */
+    h3 {
+        color: #1E3A8A !important;
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+    }
+
+    /* 5. Input Boxes - Clean & White */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #1E293B !important;
+        border: 2px solid #E2E8F0 !important;
+        border-radius: 8px !important;
+        padding: 8px !important;
+    }
+
+    /* 6. Tighten the Container */
+    [data-testid="stVerticalBlock"] {
+        gap: 0.5rem !important; /* This is the magic line that removes the huge gaps */
+    }
+
+    /* 7. Modern Button */
+    .stButton>button {
+        background-color: #2563EB;
+        color: white;
+        border-radius: 8px;
+        font-weight: bold;
+        border: none;
+        padding: 10px 25px;
+        transition: 0.2s;
+    }
+    
+    .stButton>button:hover {
+        background-color: #1D4ED8;
+        transform: scale(1.02);
+        color: white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# --- 2. CONFIGURATION ---
 DEV_MODE = True  
 FORM_ID = "1Yj8KtJ-Nb4Yf856vC5tFXPIc6OXvkrxmzBWVRmCJNzY"
 
-# 1. EXACT COLUMN ORDER FOR AI TRAINING (Matches the CSV)
 FEATURE_COLS = [
     "Basic: loop/ for-each", 
     "Basic: Method/parameter passing", 
@@ -21,8 +94,6 @@ FEATURE_COLS = [
 ]
 TARGET_COLS = [f"T_{c}" for c in FEATURE_COLS]
 ALL_TRAINING_COLS = FEATURE_COLS + TARGET_COLS
-
-st.set_page_config(page_title="CS211 Placement Test", page_icon="🧠", layout="wide")
 
 if 'quiz_started' not in st.session_state:
     st.session_state.quiz_started = False
@@ -51,8 +122,8 @@ def send_to_google_sheets(sid, name, score, status):
         return False
 
 # --- UI LOGIC ---
-st.title("CS211 Placement Test")
-st.subheader("Department of Computer Science, Bellevue College")
+# Using the new Header Class
+st.markdown('<div class="main-header"><h1>CS211 Placement Test</h1><p>Department of Computer Science, Bellevue College</p></div>', unsafe_allow_html=True)
 
 if not st.session_state.quiz_started:
     with st.container(border=True):
@@ -115,7 +186,6 @@ else:
         training_dict[cat] = score
         training_dict[f"T_{cat}"] = 1 if score < 8 else 0
 
-    # This 'columns' argument ensures the row matches the CSV file exactly
     df_training = pd.DataFrame([training_dict], columns=ALL_TRAINING_COLS)
     df_training.to_csv('student_training_data.csv', mode='a', index=False, header=not os.path.exists('student_training_data.csv'))
     
@@ -130,7 +200,7 @@ else:
             st.progress(data['correct'] / data['total'] if data['total'] > 0 else 0)
 
     with col2:
-        st.subheader("PlacementResult")
+        st.subheader("Placement Result")
         if status == "Reject":
             st.error("Status: REJECT")
         else:
