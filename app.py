@@ -221,10 +221,3 @@ else:
         for key in list(st.session_state.keys()):
             del st.session_state[key]
         st.rerun()
-
-# --- Run Streamlit for App Runner ---
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))
-    st._is_running_with_streamlit = True # type: ignore
-    from streamlit.web.bootstrap import run
-    run("app.py", "", [], {}, port, "", True)
