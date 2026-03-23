@@ -1,23 +1,16 @@
-import pandas as pd
 import os
-import requests
-from logic import load_questions, calculate_results, get_multi_label_prediction
-
-# 1. Force the Port to 8080 (Matches AWS App Runner)
+# MANDATORY: These must be set before ANY other imports
 os.environ["STREAMLIT_SERVER_PORT"] = "8080"
 os.environ["STREAMLIT_SERVER_ADDRESS"] = "0.0.0.0"
-
-# 2. Kill the "Twinkling Star" / WebSocket issues
+os.environ["STREAMLIT_SERVER_HEADLESS"] = "true"
 os.environ["STREAMLIT_SERVER_ENABLE_CORS"] = "false"
 os.environ["STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION"] = "false"
-os.environ["STREAMLIT_SERVER_ENABLE_WEBSOCKET_COMPRESSION"] = "false"
 
-# 3. Production Stability Settings
-os.environ["STREAMLIT_GLOBAL_DEVELOPMENT_MODE"] = "false"
-os.environ["STREAMLIT_SERVER_HEADLESS"] = "true"
-os.environ["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
-
+import pandas as pd
+import requests
 import streamlit as st
+from logic import load_questions, calculate_results, get_multi_label_prediction
+
 # --- 1. WEB DESIGN (CSS) ---
 st.set_page_config(page_title="CS211 Placement Test", page_icon="🧠", layout="wide")
 
