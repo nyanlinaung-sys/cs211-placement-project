@@ -5,7 +5,6 @@ import os
 os.environ["STREAMLIT_SERVER_ENABLE_CORS"] = "false"
 os.environ["STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION"] = "false"
 os.environ["STREAMLIT_SERVER_ENABLE_WEBSOCKET_COMPRESSION"] = "false"
-os.environ["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
 os.environ["STREAMLIT_GLOBAL_DEVELOPMENT_MODE"] = "false"
 
 try:
