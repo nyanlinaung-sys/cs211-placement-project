@@ -1,10 +1,15 @@
 import os
-# MANDATORY: These must be set before ANY other imports
+# MANDATORY: These must be the very first lines
 os.environ["STREAMLIT_SERVER_PORT"] = "8080"
 os.environ["STREAMLIT_SERVER_ADDRESS"] = "0.0.0.0"
 os.environ["STREAMLIT_SERVER_HEADLESS"] = "true"
+
+# FIXING THE CONFLICT: Both must be false to work together on App Runner
 os.environ["STREAMLIT_SERVER_ENABLE_CORS"] = "false"
-os.environ["STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION"] = "false"
+os.environ["STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION"] = "false" 
+
+# Add this to stop the "Node dev server" debug message
+os.environ["STREAMLIT_GLOBAL_DEVELOPMENT_MODE"] = "false"
 
 import pandas as pd
 import requests
