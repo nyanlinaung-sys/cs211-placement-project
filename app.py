@@ -4,12 +4,13 @@ os.environ["STREAMLIT_SERVER_PORT"] = "8080"
 os.environ["STREAMLIT_SERVER_ADDRESS"] = "0.0.0.0"
 os.environ["STREAMLIT_SERVER_HEADLESS"] = "true"
 
-# FIXING THE CONFLICT: Both must be false to work together on App Runner
+# FIXING THE CONFLICT: Disabling both ensures the Health Check can pass
 os.environ["STREAMLIT_SERVER_ENABLE_CORS"] = "false"
 os.environ["STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION"] = "false" 
 
-# Add this to stop the "Node dev server" debug message
+# This stops the "Node dev server" debug logs and speeds up startup
 os.environ["STREAMLIT_GLOBAL_DEVELOPMENT_MODE"] = "false"
+os.environ["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
 
 import pandas as pd
 import requests
