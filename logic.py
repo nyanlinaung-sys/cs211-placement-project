@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 import os
+import mysql.connector
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.multioutput import MultiOutputClassifier
 
@@ -94,8 +95,7 @@ def calculate_results(user_answers, questions):
     return display_points, needs_review, category_scores, status
 
 def get_multi_label_prediction(row_data):
-    """Predicts focus areas using ML with matched threshold logic."""
-    csv_file = '/tmp/student_training_data.csv'
+    """Predicts focus areas by pulling training data from the AWS RDS Database."""
     feature_cols = [
         "Basic: loop/ for-each", "Basic: Method/parameter passing", 
         "Basic: If-else/Boolean zen", "Arrays/ArrayList",
@@ -105,20 +105,40 @@ def get_multi_label_prediction(row_data):
     target_cols = [f"T_{col}" for col in feature_cols]
 
     try:
-        # Threshold 8 matches the training target logic in app.py
-        if not os.path.exists(csv_file) or os.path.getsize(csv_file) < 500:
-            return [cat for cat in feature_cols if row_data.get(cat, 0) < 8]
-            
-        df = pd.read_csv(csv_file)
-        if len(df) < 5: 
+        # 1. Connect to the Database
+        db = mysql.connector.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASS"),
+            database=os.getenv("DB_NAME")
+        )
+        
+        # 2. Pull the training data into a DataFrame
+        # Note: We query the table we created in app.py
+        query = "SELECT * FROM assessment_results"
+        df = pd.read_sql(query, db)
+        db.close()
+
+        # 3. If we don't have enough data yet (e.g., < 10 students), use the 8-point rule
+        if len(df) < 10:
             return [cat for cat in feature_cols if row_data.get(cat, 0) < 8]
 
+        # 4. Prepare targets (AI needs 0 or 1 for training)
+        for col in feature_cols:
+            df[f"T_{col}"] = (df[col] < 8).astype(int)
+
+        # 5. Train the AI Model
         X, y = df[feature_cols], df[target_cols]
         model = MultiOutputClassifier(DecisionTreeClassifier(max_depth=5))
         model.fit(X, y) # type: ignore
         
+        # 6. Make the prediction for the current student
         current_input = pd.DataFrame([row_data])[feature_cols]
         prediction = model.predict(current_input)[0] # type: ignore
+        
         return [feature_cols[i] for i, val in enumerate(prediction) if val == 1]
-    except Exception:
+
+    except Exception as e:
+        print(f"AI Training Error: {e}")
+        # Fallback to simple logic if database is empty or fails
         return [cat for cat in feature_cols if row_data.get(cat, 0) < 8]

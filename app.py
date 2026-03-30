@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import requests
 import json
+import mysql.connector
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -15,15 +16,9 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 templates = Jinja2Templates(directory=os.path.join(base_dir, "templates"))
 
 # --- SETTINGS FOR AWS DEPLOYMENT ---
-CSV_PATH = '/tmp/student_training_data.csv'   # Strictly for ML Training
-DASHBOARD_CSV = '/tmp/dashboard_analytics.csv' # For Professor Analytics
+CSV_PATH = '/tmp/student_training_data.csv'   # Strictly for ML Training (logic.py needs this)
 
-# AWS-READY PATHS
-# base_dir = os.path.dirname(os.path.abspath(__file__))
-# CSV_PATH = os.path.join(base_dir, 'student_training_data.csv')
-# DASHBOARD_CSV = os.path.join(base_dir, 'dashboard_analytics.csv')
-
-# SECURITY KEYS (Professor Name must match the Dropdown Value in register.html)
+# SECURITY KEYS
 PROFESSOR_KEYS = {
     "Taesik Kim": "pass123",
 }
@@ -34,6 +29,15 @@ FEATURE_COLS = [
     "Classes", "Inheritance/interfaces", 
     "Java Collections Framework -HashSet", "Java Collections Framework -HashMap"
 ]
+
+def get_db_connection():
+    """Connects to AWS RDS using environment variables"""
+    return mysql.connector.connect(
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASS"),
+        database=os.getenv("DB_NAME")
+    )
 
 def send_to_google_sheets(sid, name, score, status, professor, session, quarter, year):
     """Sends student data to Google Forms/Sheets"""
@@ -67,6 +71,14 @@ async def start_quiz(
     quarter: str = Form(...),
     year: str = Form(...)
 ):
+    # --- BACKEND VALIDATION ---
+    sid = sid.strip()
+    if not sid.isdigit() or len(sid) != 9:
+        return HTMLResponse("<h1>Invalid Student ID. Must be exactly 9 digits.</h1>", status_code=400)
+    
+    if len(name.strip()) < 2:
+        return HTMLResponse("<h1>Please enter a valid Full Name.</h1>", status_code=400)
+
     questions = load_questions()
     return templates.TemplateResponse("quiz.html", {
         "request": request, 
@@ -90,6 +102,11 @@ async def handle_submit(
     year: str = Form(...)
 ):
     try:
+        # Backend double-check for data integrity
+        sid = sid.strip()
+        if not sid.isdigit() or len(sid) != 9:
+            return HTMLResponse("<h1>Data Integrity Error: Invalid SID format.</h1>", status_code=400)
+
         form_data = await request.form()
         questions = load_questions()
         
@@ -112,21 +129,32 @@ async def handle_submit(
                 "summary": CHAPTER_INSIGHTS.get(area, "This foundational topic is essential for upcoming CS211 chapters.")
             })
 
+        # --- DATABASE LOGIC (Saves Permanently) ---
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS assessment_results (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    sid VARCHAR(50), name VARCHAR(255), professor VARCHAR(255),
+                    session VARCHAR(50), quarter VARCHAR(50), year VARCHAR(50),
+                    score INT, status VARCHAR(50),
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+            sql = "INSERT INTO assessment_results (sid, name, professor, session, quarter, year, score, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+            cursor.execute(sql, (sid, name, professor, session, quarter, year, points, status))
+            conn.commit()
+            cursor.close()
+            conn.close()
+        except Exception as db_e:
+            print(f"Database Error: {db_e}")
+
+        # --- TEMP CSV LOGIC (Feeds the AI in logic.py) ---
         training_dict = {cat: row_data[cat] for cat in FEATURE_COLS}
         for cat in FEATURE_COLS:
             training_dict[f"T_{cat}"] = 1 if training_dict[cat] < 8 else 0
         pd.DataFrame([training_dict]).to_csv(CSV_PATH, mode='a', index=False, header=not os.path.exists(CSV_PATH))
-
-        analytics_dict = {
-            "Professor": str(professor).strip(), 
-            "Session": str(session).strip(), 
-            "Quarter": str(quarter).strip(), 
-            "Year": str(year).strip(),
-            "Total_Score": points, 
-            "Student_Name": name,
-            **{cat: row_data[cat] for cat in FEATURE_COLS}
-        }
-        pd.DataFrame([analytics_dict]).to_csv(DASHBOARD_CSV, mode='a', index=False, header=not os.path.exists(DASHBOARD_CSV))
 
         return templates.TemplateResponse("result.html", {
             "request": request, 
@@ -162,16 +190,20 @@ async def dashboard(
     if not prof_f or prof_f not in PROFESSOR_KEYS or PROFESSOR_KEYS[prof_f] != key:
         return HTMLResponse(content="<h1>Access Denied</h1>", status_code=403)
 
-    if not os.path.exists(DASHBOARD_CSV):
+    try:
+        conn = get_db_connection()
+        df = pd.read_sql("SELECT * FROM assessment_results", conn)
+        conn.close()
+        
+        df = df.rename(columns={'name': 'Student_Name', 'score': 'Total_Score', 'professor': 'Professor', 'session': 'Session', 'quarter': 'Quarter', 'year': 'Year'})
+    except Exception:
         return templates.TemplateResponse("admin.html", {
-            "request": request, "error": "No data yet.", "total_students": 0,
+            "request": request, "error": "No database data found yet.", "total_students": 0,
             "averages": {cat: 0 for cat in FEATURE_COLS}, "filters": {"sessions": [], "quarters": [], "years": []},
             "selections": {"prof": prof_f, "key": key, "sess": sess_f, "qtr": qtr_f, "yr": yr_f}
         })
 
-    df = pd.read_csv(DASHBOARD_CSV)
-    
-    # ROBUST FILTERING: Convert all columns to stripped strings to ensure matches
+    # Data Cleaning for filters
     for col in ['Professor', 'Session', 'Quarter', 'Year']:
         df[col] = df[col].astype(str).str.strip()
 
@@ -187,7 +219,7 @@ async def dashboard(
     if qtr_f: df = df[df['Quarter'] == str(qtr_f).strip()]
     if yr_f: df = df[df['Year'] == str(yr_f).strip()]
 
-    averages = {cat: round(df[cat].mean(), 2) if not df.empty else 0 for cat in FEATURE_COLS}
+    averages = {cat: 0 for cat in FEATURE_COLS} 
     recent_students = df[['Student_Name', 'Total_Score']].tail(5).to_dict('records') if not df.empty else []
 
     return templates.TemplateResponse("admin.html", {
