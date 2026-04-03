@@ -5,7 +5,7 @@
     "options": ["for", "while", "do-while", "for-each"],
     "answer": "do-while",
     "category": "Basic: loop/ for-each",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+    "tip": "Loops are the engine of your code. In CS211, you will use them for complex tasks like searching through data and building Linked Lists (Ch16). If you struggle with loops now, advanced topics like Recursion (Ch12) and Sorting (Ch13) will be very difficult to follow. Practice nesting loops and using for-each to build your confidence."
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "options": ["Access the current element", "Iterate over an ArrayList", "Access the current index", "Iterate over an array"],
     "answer": "Access the current index",
     "category": "Basic: loop/ for-each",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+    "tip": "Loops are the engine of your code. In CS211, you will use them for complex tasks like searching through data and building Linked Lists (Ch16). If you struggle with loops now, advanced topics like Recursion (Ch12) and Sorting (Ch13) will be very difficult to follow. Practice nesting loops and using for-each to build your confidence."
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "options": ["It works fine", "ConcurrentModificationException", "The loop skips an element", "NullPointerException"],
     "answer": "ConcurrentModificationException",
     "category": "Basic: loop/ for-each",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+    "tip": "Loops are the engine of your code. In CS211, you will use them for complex tasks like searching through data and building Linked Lists (Ch16). If you struggle with loops now, advanced topics like Recursion (Ch12) and Sorting (Ch13) will be very difficult to follow. Practice nesting loops and using for-each to build your confidence."
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "options": ["int i=0", "i<5", "i++", "The body"],
     "answer": "i<5",
     "category": "Basic: loop/ for-each",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+    "tip": "Loops are the engine of your code. In CS211, you will use them for complex tasks like searching through data and building Linked Lists (Ch16). If you struggle with loops now, advanced topics like Recursion (Ch12) and Sorting (Ch13) will be very difficult to follow. Practice nesting loops and using for-each to build your confidence."
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "options": ["while", "standard for", "for-each", "do-while"],
     "answer": "for-each",
     "category": "Basic: loop/ for-each",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList"
+    "tip": "Loops are the engine of your code. In CS211, you will use them for complex tasks like searching through data and building Linked Lists (Ch16). If you struggle with loops now, advanced topics like Recursion (Ch12) and Sorting (Ch13) will be very difficult to follow. Practice nesting loops and using for-each to build your confidence."
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@
     "options": ["By Reference", "By Value", "By Address", "By Proxy"],
     "answer": "By Value",
     "category": "Basic: Method/parameter passing",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+    "tip": "Methods organize your logic, and understanding how data moves between them is critical. Java's 'Pass-by-Value' system is the foundation for Recursion (Ch12) and managing Binary Trees (Ch17). If parameters and return types are confusing, your code will likely have bugs that are hard to find. Focus on how object references differ from primitive numbers when passed into a method."
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@
     "options": ["A full copy of the object", "The memory reference to the object", "The object's class", "Nothing"],
     "answer": "The memory reference to the object",
     "category": "Basic: Method/parameter passing",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+    "tip": "Methods organize your logic, and understanding how data moves between them is critical. Java's 'Pass-by-Value' system is the foundation for Recursion (Ch12) and managing Binary Trees (Ch17). If parameters and return types are confusing, your code will likely have bugs that are hard to find. Focus on how object references differ from primitive numbers when passed into a method."
   },
   {
     "id": 8,
@@ -61,7 +61,7 @@
     "options": ["Two methods with same name and different parameters", "A method calling itself", "A subclass redefining a parent method", "A method with no return type"],
     "answer": "Two methods with same name and different parameters",
     "category": "Basic: Method/parameter passing",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+    "tip": "Methods organize your logic, and understanding how data moves between them is critical. Java's 'Pass-by-Value' system is the foundation for Recursion (Ch12) and managing Binary Trees (Ch17). If parameters and return types are confusing, your code will likely have bugs that are hard to find. Focus on how object references differ from primitive numbers when passed into a method."
   },
   {
     "id": 9,
@@ -69,7 +69,7 @@
     "options": ["break", "stop", "return", "exit"],
     "answer": "return",
     "category": "Basic: Method/parameter passing",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+    "tip": "Methods organize your logic, and understanding how data moves between them is critical. Java's 'Pass-by-Value' system is the foundation for Recursion (Ch12) and managing Binary Trees (Ch17). If parameters and return types are confusing, your code will likely have bugs that are hard to find. Focus on how object references differ from primitive numbers when passed into a method."
   },
   {
     "id": 10,
@@ -77,7 +77,7 @@
     "options": ["The method returns null", "The method returns an empty object", "The method returns nothing", "The method returns 0"],
     "answer": "The method returns nothing",
     "category": "Basic: Method/parameter passing",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch17 Binary Tree"
+    "tip": "Methods organize your logic, and understanding how data moves between them is critical. Java's 'Pass-by-Value' system is the foundation for Recursion (Ch12) and managing Binary Trees (Ch17). If parameters and return types are confusing, your code will likely have bugs that are hard to find. Focus on how object references differ from primitive numbers when passed into a method."
   },
   {
     "id": 11,
@@ -85,7 +85,7 @@
     "options": ["if (isReady == true)", "if (isReady)", "if (isReady != false)", "if (isReady == !false)"],
     "answer": "if (isReady)",
     "category": "Basic: If-else/Boolean zen",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Logic flow is how your program makes decisions. 'Boolean Zen' is about writing clean, simple logic without extra '== true' statements. In CS211, you'll need sharp logic to navigate complex structures like Binary Search Trees (Ch17) and Hash Tables (Ch18). Mastering clean if-else statements now will prevent massive headaches when debugging later."
   },
   {
     "id": 12,
@@ -93,7 +93,7 @@
     "options": ["true", "false", "null", "error"],
     "answer": "true",
     "category": "Basic: If-else/Boolean zen",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Logic flow is how your program makes decisions. 'Boolean Zen' is about writing clean, simple logic without extra '== true' statements. In CS211, you'll need sharp logic to navigate complex structures like Binary Search Trees (Ch17) and Hash Tables (Ch18). Mastering clean if-else statements now will prevent massive headaches when debugging later."
   },
   {
     "id": 13,
@@ -101,7 +101,7 @@
     "options": ["If A is true, B is not checked", "If A is false, B is not checked", "Both are always checked", "B is checked first"],
     "answer": "If A is false, B is not checked",
     "category": "Basic: If-else/Boolean zen",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Logic flow is how your program makes decisions. 'Boolean Zen' is about writing clean, simple logic without extra '== true' statements. In CS211, you'll need sharp logic to navigate complex structures like Binary Search Trees (Ch17) and Hash Tables (Ch18). Mastering clean if-else statements now will prevent massive headaches when debugging later."
   },
   {
     "id": 14,
@@ -109,7 +109,7 @@
     "options": ["&", "!", "~", "|"],
     "answer": "!",
     "category": "Basic: If-else/Boolean zen",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Logic flow is how your program makes decisions. 'Boolean Zen' is about writing clean, simple logic without extra '== true' statements. In CS211, you'll need sharp logic to navigate complex structures like Binary Search Trees (Ch17) and Hash Tables (Ch18). Mastering clean if-else statements now will prevent massive headaches when debugging later."
   },
   {
     "id": 15,
@@ -117,7 +117,7 @@
     "options": ["More efficient but harder to read", "Boolean Zen", "Incorrect syntax", "A compile error"],
     "answer": "Boolean Zen",
     "category": "Basic: If-else/Boolean zen",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Time Complexity, Ch13 Sorting, Ch14 Stack/Queue, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Logic flow is how your program makes decisions. 'Boolean Zen' is about writing clean, simple logic without extra '== true' statements. In CS211, you'll need sharp logic to navigate complex structures like Binary Search Trees (Ch17) and Hash Tables (Ch18). Mastering clean if-else statements now will prevent massive headaches when debugging later."
   },
   {
     "id": 16,
@@ -125,7 +125,7 @@
     "options": ["1", "0", "-1", "Any number"],
     "answer": "0",
     "category": "Arrays/ArrayList",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Arrays and ArrayLists are the most common ways to store data in Java. CS211 is all about learning how these work 'under the hood' to create Stacks and Queues (Ch14). If you aren't comfortable adding, removing, or accessing elements by their index, you will struggle with almost every chapter in the second half of the course."
   },
   {
     "id": 17,
@@ -133,7 +133,7 @@
     "options": ["arr.size()", "arr.length()", "arr.length", "arr.count"],
     "answer": "arr.length",
     "category": "Arrays/ArrayList",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Arrays and ArrayLists are the most common ways to store data in Java. CS211 is all about learning how these work 'under the hood' to create Stacks and Queues (Ch14). If you aren't comfortable adding, removing, or accessing elements by their index, you will struggle with almost every chapter in the second half of the course."
   },
   {
     "id": 18,
@@ -141,7 +141,7 @@
     "options": ["int[]", "ArrayList", "String[]", "double[]"],
     "answer": "ArrayList",
     "category": "Arrays/ArrayList",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Arrays and ArrayLists are the most common ways to store data in Java. CS211 is all about learning how these work 'under the hood' to create Stacks and Queues (Ch14). If you aren't comfortable adding, removing, or accessing elements by their index, you will struggle with almost every chapter in the second half of the course."
   },
   {
     "id": 19,
@@ -149,7 +149,7 @@
     "options": ["put()", "push()", "insert()", "add()"],
     "answer": "add()",
     "category": "Arrays/ArrayList",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Arrays and ArrayLists are the most common ways to store data in Java. CS211 is all about learning how these work 'under the hood' to create Stacks and Queues (Ch14). If you aren't comfortable adding, removing, or accessing elements by their index, you will struggle with almost every chapter in the second half of the course."
   },
   {
     "id": 20,
@@ -157,7 +157,7 @@
     "options": ["list[2]", "list.get(2)", "list.at(2)", "list(2)"],
     "answer": "list.get(2)",
     "category": "Arrays/ArrayList",
-    "tip": "Relevant CS211 Chapters: Ch09 Review, Ch12 Recursion, Ch13 Search, Ch13 Sorting, Ch14 Stack/Queue, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing, Ch18 Heap"
+    "tip": "Arrays and ArrayLists are the most common ways to store data in Java. CS211 is all about learning how these work 'under the hood' to create Stacks and Queues (Ch14). If you aren't comfortable adding, removing, or accessing elements by their index, you will struggle with almost every chapter in the second half of the course."
   },
   {
     "id": 21,
@@ -165,7 +165,7 @@
     "options": ["super", "self", "this", "current"],
     "answer": "this",
     "category": "Classes",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "CS211 moves deep into Object-Oriented Programming, and everything starts with a Class. You need to be an expert at using constructors, 'this', and private variables to keep data safe. Without a strong grasp of Classes, you won't be able to build the custom data structures required for the Ch16-Ch18 assignments."
   },
   {
     "id": 22,
@@ -173,7 +173,7 @@
     "options": ["To destroy an object", "To initialize object state", "To define a method", "To inherit from a class"],
     "answer": "To initialize object state",
     "category": "Classes",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "CS211 moves deep into Object-Oriented Programming, and everything starts with a Class. You need to be an expert at using constructors, 'this', and private variables to keep data safe. Without a strong grasp of Classes, you won't be able to build the custom data structures required for the Ch16-Ch18 assignments."
   },
   {
     "id": 23,
@@ -181,7 +181,7 @@
     "options": ["To save memory", "To speed up code", "Encapsulation", "It's required by Java"],
     "answer": "Encapsulation",
     "category": "Classes",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "CS211 moves deep into Object-Oriented Programming, and everything starts with a Class. You need to be an expert at using constructors, 'this', and private variables to keep data safe. Without a strong grasp of Classes, you won't be able to build the custom data structures required for the Ch16-Ch18 assignments."
   },
   {
     "id": 24,
@@ -189,7 +189,7 @@
     "options": ["public", "protected", "private", "default"],
     "answer": "private",
     "category": "Classes",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "CS211 moves deep into Object-Oriented Programming, and everything starts with a Class. You need to be an expert at using constructors, 'this', and private variables to keep data safe. Without a strong grasp of Classes, you won't be able to build the custom data structures required for the Ch16-Ch18 assignments."
   },
   {
     "id": 25,
@@ -197,7 +197,7 @@
     "options": ["Inside a method", "Outside methods, inside the class", "Inside the main method", "In a separate file"],
     "answer": "Outside methods, inside the class",
     "category": "Classes",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "CS211 moves deep into Object-Oriented Programming, and everything starts with a Class. You need to be an expert at using constructors, 'this', and private variables to keep data safe. Without a strong grasp of Classes, you won't be able to build the custom data structures required for the Ch16-Ch18 assignments."
   },
   {
     "id": 26,
@@ -205,7 +205,7 @@
     "options": ["implements", "inherits", "extends", "uses"],
     "answer": "extends",
     "category": "Inheritance/interfaces",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "Inheritance and Interfaces allow you to share code between different parts of your project. This is a major focus in the Ch09 Review and is used to build flexible, professional software. Understanding how 'extends' and 'implements' work will help you understand how Java's own built-in tools (like the Collections Framework) are organized."
   },
   {
     "id": 27,
@@ -213,7 +213,7 @@
     "options": ["extends", "implements", "inherits", "includes"],
     "answer": "implements",
     "category": "Inheritance/interfaces",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "Inheritance and Interfaces allow you to share code between different parts of your project. This is a major focus in the Ch09 Review and is used to build flexible, professional software. Understanding how 'extends' and 'implements' work will help you understand how Java's own built-in tools (like the Collections Framework) are organized."
   },
   {
     "id": 28,
@@ -221,7 +221,7 @@
     "options": ["Same name, different params in one class", "Subclass redefining a method from superclass", "Defining multiple constructors", "Calling super()"],
     "answer": "Subclass redefining a method from superclass",
     "category": "Inheritance/interfaces",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "Inheritance and Interfaces allow you to share code between different parts of your project. This is a major focus in the Ch09 Review and is used to build flexible, professional software. Understanding how 'extends' and 'implements' work will help you understand how Java's own built-in tools (like the Collections Framework) are organized."
   },
   {
     "id": 29,
@@ -229,7 +229,7 @@
     "options": ["parent()", "this()", "super()", "base()"],
     "answer": "super()",
     "category": "Inheritance/interfaces",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "Inheritance and Interfaces allow you to share code between different parts of your project. This is a major focus in the Ch09 Review and is used to build flexible, professional software. Understanding how 'extends' and 'implements' work will help you understand how Java's own built-in tools (like the Collections Framework) are organized."
   },
   {
     "id": 30,
@@ -237,7 +237,7 @@
     "options": ["Yes", "No", "Only if they are abstract", "Only if they are final"],
     "answer": "No",
     "category": "Inheritance/interfaces",
-    "tip": "Relevant CS211 Chapters: Ch09 Review"
+    "tip": "Inheritance and Interfaces allow you to share code between different parts of your project. This is a major focus in the Ch09 Review and is used to build flexible, professional software. Understanding how 'extends' and 'implements' work will help you understand how Java's own built-in tools (like the Collections Framework) are organized."
   },
   {
     "id": 31,
@@ -245,7 +245,7 @@
     "options": ["Preserves order", "Allows duplicates", "No duplicates", "Allows index access"],
     "answer": "No duplicates",
     "category": "Java Collections Framework -HashSet",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+    "tip": "A HashSet is a super-fast way to store unique items without duplicates. It is much faster than a standard list for checking if an item exists (O(1) complexity). In CS211, you will learn how to build your own version of this using Hashing (Ch18). Knowing when to use a Set instead of a List is a sign of a true intermediate programmer."
   },
   {
     "id": 32,
@@ -253,7 +253,7 @@
     "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)"],
     "answer": "O(1)",
     "category": "Java Collections Framework -HashSet",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+    "tip": "A HashSet is a super-fast way to store unique items without duplicates. It is much faster than a standard list for checking if an item exists (O(1) complexity). In CS211, you will learn how to build your own version of this using Hashing (Ch18). Knowing when to use a Set instead of a List is a sign of a true intermediate programmer."
   },
   {
     "id": 33,
@@ -261,7 +261,7 @@
     "options": ["Yes", "No", "Only for integers", "Only for strings"],
     "answer": "No",
     "category": "Java Collections Framework -HashSet",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+    "tip": "A HashSet is a super-fast way to store unique items without duplicates. It is much faster than a standard list for checking if an item exists (O(1) complexity). In CS211, you will learn how to build your own version of this using Hashing (Ch18). Knowing when to use a Set instead of a List is a sign of a true intermediate programmer."
   },
   {
     "id": 34,
@@ -269,7 +269,7 @@
     "options": ["It throws an error", "It overwrites the old one", "The set remains unchanged", "It creates a list inside"],
     "answer": "The set remains unchanged",
     "category": "Java Collections Framework -HashSet",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+    "tip": "A HashSet is a super-fast way to store unique items without duplicates. It is much faster than a standard list for checking if an item exists (O(1) complexity). In CS211, you will learn how to build your own version of this using Hashing (Ch18). Knowing when to use a Set instead of a List is a sign of a true intermediate programmer."
   },
   {
     "id": 35,
@@ -277,7 +277,7 @@
     "options": ["toString and equals", "hashCode and equals", "compareTo and equals", "clone and equals"],
     "answer": "hashCode and equals",
     "category": "Java Collections Framework -HashSet",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch18 Hashing"
+    "tip": "A HashSet is a super-fast way to store unique items without duplicates. It is much faster than a standard list for checking if an item exists (O(1) complexity). In CS211, you will learn how to build your own version of this using Hashing (Ch18). Knowing when to use a Set instead of a List is a sign of a true intermediate programmer."
   },
   {
     "id": 36,
@@ -285,7 +285,7 @@
     "options": ["A list of values", "Key-Value pairs", "Unique items only", "Ordered items"],
     "answer": "Key-Value pairs",
     "category": "Java Collections Framework -HashMap",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+    "tip": "HashMaps are incredibly powerful tools that link 'Keys' to 'Values' for instant retrieval. They are used everywhere in professional software for things like dictionaries or databases. In CS211, you'll explore how these are built using arrays and linked lists (Ch16-18). Mastering HashMaps now gives you a massive advantage for the final projects of the quarter."
   },
   {
     "id": 37,
@@ -293,7 +293,7 @@
     "options": ["get(index)", "get(key)", "find(key)", "value(key)"],
     "answer": "get(key)",
     "category": "Java Collections Framework -HashMap",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+    "tip": "HashMaps are incredibly powerful tools that link 'Keys' to 'Values' for instant retrieval. They are used everywhere in professional software for things like dictionaries or databases. In CS211, you'll explore how these are built using arrays and linked lists (Ch16-18). Mastering HashMaps now gives you a massive advantage for the final projects of the quarter."
   },
   {
     "id": 38,
@@ -301,7 +301,7 @@
     "options": ["It adds a second entry", "It throws an error", "It replaces the old value", "It is ignored"],
     "answer": "It replaces the old value",
     "category": "Java Collections Framework -HashMap",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+    "tip": "HashMaps are incredibly powerful tools that link 'Keys' to 'Values' for instant retrieval. They are used everywhere in professional software for things like dictionaries or databases. In CS211, you'll explore how these are built using arrays and linked lists (Ch16-18). Mastering HashMaps now gives you a massive advantage for the final projects of the quarter."
   },
   {
     "id": 39,
@@ -309,7 +309,7 @@
     "options": ["No", "Yes", "Only if keys are different", "Only if values are unique"],
     "answer": "Yes",
     "category": "Java Collections Framework -HashMap",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+    "tip": "HashMaps are incredibly powerful tools that link 'Keys' to 'Values' for instant retrieval. They are used everywhere in professional software for things like dictionaries or databases. In CS211, you'll explore how these are built using arrays and linked lists (Ch16-18). Mastering HashMaps now gives you a massive advantage for the final projects of the quarter."
   },
   {
     "id": 40,
@@ -317,6 +317,6 @@
     "options": ["hasKey()", "exists()", "containsKey()", "contains()"],
     "answer": "containsKey()",
     "category": "Java Collections Framework -HashMap",
-    "tip": "Relevant CS211 Chapters: Ch13 Search, Ch13 Time Complexity, Ch16 LinkedList, Ch17 Binary Tree, Ch18 Hashing"
+    "tip": "HashMaps are incredibly powerful tools that link 'Keys' to 'Values' for instant retrieval. They are used everywhere in professional software for things like dictionaries or databases. In CS211, you'll explore how these are built using arrays and linked lists (Ch16-18). Mastering HashMaps now gives you a massive advantage for the final projects of the quarter."
   }
 ]

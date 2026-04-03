@@ -3,6 +3,7 @@
 <head>
     <title>Assessment Results</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         body { background-color: #F8FAFC; color: #1E293B; }
         .result-header { padding: 40px; border-radius: 15px; color: white; text-align: center; margin-top: 2rem; }
@@ -16,9 +17,20 @@
 </head>
 <body class="container pb-5">
     <div class="result-header shadow
-    {% if status == 'Pass' %} Your knowledge is sufficient to take CS211.
-    {% elif status == 'Reject' %}Your knowledge is not quite sufficient to take CS211.
-    {% else %}You may be able to take CS211, but you’ll need to do more preparation before the quarter starts.{% endif %}">
+    {% if status == 'Pass' and points >= 60 %}bg-pass
+    {% elif status == 'Pass' %}bg-review
+    {% else %}bg-reject{% endif %}">
+
+    <p class="lead mb-3 px-4 fs-4">
+        {% if status == 'Pass' and points >= 60 %}
+            Your knowledge is sufficient to take CS211.
+        {% elif status == 'Pass' %}
+            You may be able to take CS211, but you’ll need to do more preparation before the quarter starts.
+        {% else %}
+            Your knowledge is not quite sufficient to take CS211.
+        {% endif %}
+    </p>
+
         <h1>Final Score: {{ points }} / 80</h1>
         <h2>Status: {{ status }}</h2>
     </div>
@@ -33,7 +45,7 @@
                     <span>{{ score.correct }}/{{ score.total }}</span>
                 </div>
                 <div class="progress" style="height: 10px;">
-                    <div class="progress-bar bg-primary" style="width: {{ (score.correct / score.total) * 100 if score.total > 0 else 0 }}%"></div>
+                    <div class="progress-bar bg-primary" style="width: {{ (score.correct / score.total) * 100 ... }}%"></div>
                 </div>
             </div>
             {% endfor %}
@@ -44,7 +56,7 @@
 
             {% if status == "Reject" %}
                 <div class="alert alert-secondary mt-3">
-                    <p class="mb-0">Please review core Java fundamentals. No specific roadmap is generated for this result status.</p>
+                    <p class="mb-0">You need to pass at least minimum requirements in all areas. Please review core Java fundamentals.</p>
                 </div>
             {% elif points == 80 %}
                 <div class="alert alert-success mt-3">
@@ -98,11 +110,9 @@
         </div>
     </div>
 
-    <footer class="text-center mt-5 pb-4 text-muted">
-        <hr class="mb-4" style="opacity: 0.1;">
-        <p class="small">
-            &copy; 2026 Bellevue College - Computer Science Department.<br>
-        </p>
+    <footer class="text-center mt-auto py-5 text-muted">
+        <hr class="mx-auto mb-4" style="opacity: 0.1; width: 50%;">
+        <p class="small mb-0">&copy; 2026 Bellevue College - Computer Science Department  </p>
     </footer>
 </body>
 </html>

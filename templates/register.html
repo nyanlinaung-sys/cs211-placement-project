@@ -75,10 +75,10 @@
                     <label class="form-label">Session</label>
                     <select id="sesssionSelect" name="session" class="form-select" required>
                         <option value="" selected disabled>Choose...</option>
-                        <option value="1">AA-LEC (17400)</option>
-                        <option value="2">OA-LEC (17401)</option>
-                        <option value="3">OB-LEC (17402)</option>
-                        <option value="4">OD-LEC (17430)</option>
+                        <option value="AA-LEC (17400)">AA-LEC (17400)</option>
+                        <option value="OA-LEC (17401)">OA-LEC (17401)</option>
+                        <option value="OB-LEC (17402)">OB-LEC (17402)</option>
+                        <option value="OD-LEC (17430)">OD-LEC (17430)</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
@@ -121,10 +121,10 @@
             const hiddenProfInput = document.getElementById('hiddenProfessor');
 
             const sessionToProfessors = {
-                '1': ['Taesik Kim'],
-                '2': ['Tanuja Joshi'],
-                '3': ['Varik Hoang'],
-                '4': ['Joseph Hueffed']
+                'AA-LEC (17400)': ['Taesik Kim'],
+                'OA-LEC (17401)': ['Tanuja Joshi'],
+                'OB-LEC (17402)': ['Varik Hoang'],
+                'OD-LEC (17430)': ['Joseph Hueffed']
             };
 
             sessionSelect.addEventListener('change', function() {
