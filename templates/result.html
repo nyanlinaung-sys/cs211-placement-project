@@ -17,18 +17,18 @@
 </head>
 <body class="container pb-5">
     <div class="result-header shadow
-    {% if status == 'Pass' and points >= 60 %}bg-pass
-    {% elif status == 'Pass' %}bg-review
-    {% else %}bg-failed{% endif %}">    
+        {% if status == 'Pass' %}bg-pass
+        {% elif status == 'Advice' %}bg-review
+        {% else %}bg-failed{% endif %}">    
 
         <h1>Final Score: {{ points }} / 80</h1>
         <h2 class="lead mb-3 px-4 fs-4">
-        {% if status == 'Pass' and points >= 60 %}
+        {% if status == 'Pass' %}
             Your knowledge is sufficient to take CS211.
-        {% elif status == 'Pass' %}
+        {% elif status == 'Advice' %}
             You may be able to take CS211, but you’ll need to do more preparation before the quarter starts.
         {% else %}
-            Your knowledge is not quite sufficient to take CS211.
+            Your knowledge is not quite sufficient to take CS211. Please review core Java fundamentals.
         {% endif %}
         </h2>
     </div>
@@ -48,64 +48,42 @@
             </div>
             {% endfor %}
         </div>
-
         <div class="col-md-7">
-            <h3>CS211 Preparation Roadmap</h3>
+    <h3>CS211 Preparation Roadmap</h3>
 
-            {% if status == "Failed" %}
-                <div class="alert alert-secondary mt-3">
-                    <p class="mb-0">You need to pass at least minimum requirements in all areas. Please review core Java fundamentals.</p>
-                </div>
-            {% elif points == 80 %}
-                <div class="alert alert-success mt-3">
-                    <h4>🌟 Mastery Achieved</h4>
-                    <p>You have a strong foundation for all CS211 chapters!</p>
-                </div>
-            {% else %}
-                <p class="text-muted mb-4">You passed! However, to succeed in <strong>CS211</strong>, you must strengthen these areas because of their high importance in the upcoming curriculum:</p>
-                
-                {% for rec in recommendations %}
-                    <div class="suggestion-card">
-                        <h5 class="text-primary">Focus Area: {{ rec.topic }}</h5>
-                        
-                        <p class="mt-2 mb-1"><strong>Why this is critical for CS211:</strong></p>
-                        <div class="d-flex flex-wrap gap-1 mb-3">
-                            {% if rec.topic == "Basic: loop/ for-each" %}
-                                <span class="relevance-badge">Ch09 Review (High)</span>
-                                <span class="relevance-badge">Ch12 Recursion (High)</span>
-                                <span class="relevance-badge">Ch13 Search/Complexity (High)</span>
-                            {% elif rec.topic == "Basic: Method/parameter passing" %}
-                                <span class="relevance-badge">Ch12 Recursion (High)</span>
-                                <span class="relevance-badge">Ch17 Binary Trees (Med)</span>
-                            {% elif rec.topic == "Basic: If-else/Boolean zen" %}
-                                <span class="relevance-badge">Ch12 Recursion (High)</span>
-                                <span class="relevance-badge">Ch13 Search (High)</span>
-                                <span class="relevance-badge">Ch18 Hashing (Med)</span>
-                            {% elif rec.topic == "Arrays/ArrayList" %}
-                                <span class="relevance-badge">Ch14 Stacks/Queues (High)</span>
-                                <span class="relevance-badge">Ch17 Binary Trees (High)</span>
-                                <span class="relevance-badge">Ch18 Hashing (High)</span>
-                            {% elif rec.topic == "Classes" or rec.topic == "Inheritance/interfaces" %}
-                                <span class="relevance-badge">Ch09 Review (High)</span>
-                                <span class="relevance-badge">All Chapters (Fundamental)</span>
-                            {% elif rec.topic == "Java Collections Framework -HashSet" or rec.topic == "Java Collections Framework -HashMap" %}
-                                <span class="relevance-badge">Ch13 Search (High)</span>
-                                <span class="relevance-badge">Ch18 Hashing (High)</span>
-                            {% endif %}
-                        </div>
-
-                        <p class="text-dark border-top pt-2" style="font-size: 0.95rem;">
-                            <i class="bi bi-info-circle text-primary"></i> 
-                            {{ rec.summary }}
-                        </p>
-                    </div>
-                {% endfor %}
-            {% endif %}
-
-            <div class="mt-4">
-                <a href="/" class="btn btn-outline-primary w-100">Back to Home</a>
-            </div>
+    {% if status == "Failed" %}
+        <div class="alert alert-danger mt-3">
+            <h4><i class="bi bi-exclamation-triangle"></i> Action Required</h4>
+            <p class="mb-0">You did not meet the minimum requirements for CS211. We strongly recommend retaking CS210 or completing a intensive Java review before enrolling.</p>
         </div>
+    {% elif points == 80 %}
+        <div class="alert alert-success mt-3">
+            <h4>🌟 Mastery Achieved</h4>
+            <p>You have a perfect score! You are fully prepared for the challenges of CS211.</p>
+        </div>
+    {% else %}
+        <p class="text-muted mb-4">
+            {% if status == 'Advice' %}
+                <strong>Note:</strong> You met the absolute minimums, but to succeed in <strong>CS211</strong>, you must strengthen these specific areas:
+            {% else %}
+                Great job! To ensure an 'A' in <strong>CS211</strong>, review these key concepts:
+            {% endif %}
+        </p>
+        
+        {% for rec in recommendations %}
+            <div class="suggestion-card">
+                <h5 class="text-primary">Focus Area: {{ rec.topic }}</h5>
+                <p class="text-dark border-top pt-2" style="font-size: 0.95rem;">
+                    <i class="bi bi-info-circle text-primary"></i> 
+                    {{ rec.summary }}
+                </p>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="/" class="btn btn-outline-primary w-100">Back to Home</a>
+    </div>
     </div>
 
     <footer class="text-center mt-auto py-5 text-muted">
