@@ -142,9 +142,9 @@ async def handle_submit(
                 )
             """)
             sql = """INSERT INTO assessment_results 
-                     (sid, name, professor, session, quarter, year, score, status, 
-                      loops, methods, logic, arrays, classes, inheritance, hashset, hashmap) 
-                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+                    (`sid`, `name`, `professor`, `session`, `quarter`, `year`, `score`, `status`, 
+                    `loops`, `methods`, `logic`, `arrays`, `classes`, `inheritance`, `hashset`, `hashmap`) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
             
             cursor.execute(sql, (sid, name, professor, session, quarter, year, points, status,
                                  s_map['loops'], s_map['methods'], s_map['logic'], s_map['arrays'], 
