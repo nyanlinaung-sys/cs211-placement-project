@@ -7,7 +7,7 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.sessions import SessionMiddleware # Added for security
-from logic import load_questions, calculate_results, get_multi_label_prediction, CHAPTER_INSIGHTS
+from logic import load_questions, calculate_results, get_multi_label_prediction
 
 app = FastAPI()
 
@@ -116,16 +116,6 @@ async def handle_submit(
         }
 
         send_to_google_sheets(sid, name, points, status, professor, session, quarter, year)
-        
-        row_data = {cat: cat_scores.get(cat, {'correct': 0})['correct'] * 2 for cat in FEATURE_COLS}
-        recommendations = get_multi_label_prediction(row_data)
-
-        detailed_recs = []
-        for area in recommendations:
-            detailed_recs.append({
-                "topic": area,
-                "summary": CHAPTER_INSIGHTS.get(area, "Reviewing this topic will help in CS211.")
-            })
 
         try:
             conn = get_db_connection()
