@@ -59,7 +59,7 @@ def check_passing_status(category_scores):
         group_points = [category_scores.get(cat, {"correct": 0})["correct"] * 2 for cat in rules["categories"]]
         
         if not all(p >= rules["abs_min"] for p in group_points):
-            return "Reject"
+            return "Failed"
             
         high_scores = sum(1 for p in group_points if p >= rules["pass_min"])
         if high_scores < rules["min_pass_count"]:
