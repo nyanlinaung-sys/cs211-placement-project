@@ -22,7 +22,20 @@
         .bg-review { background: linear-gradient(135deg, #B45309 0%, #F59E0B 100%); }
         
         .suggestion-card { border-left: 5px solid #3B82F6; padding: 20px; background: white; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        
+        .relevance-badge {
+            background-color: #003366; /* Deep Professional Blue */
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px; /* Makes them pill-shaped */
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
         footer { flex-shrink: 0; background: white; border-top: 1px solid #E2E8F0; }
     </style>
 </head>
@@ -96,7 +109,6 @@
                 {% for rec in recommendations %}
                     <div class="suggestion-card">
                         <h5 class="text-primary">Focus Area: {{ rec.topic }}</h5>
-                
                         <div class="d-flex flex-wrap gap-1 mb-3">
                             {% if rec.topic == "Basic: loop/ for-each" %}
                                 <span class="relevance-badge">Ch09 Review (High)</span>
