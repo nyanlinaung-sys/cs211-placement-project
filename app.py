@@ -1,9 +1,8 @@
 import os
 import pandas as pd
 import requests
-import json
 import mysql.connector
-from fastapi import FastAPI, Request, Form
+from fastapi import FastAPI, Request, Response, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.sessions import SessionMiddleware # Added for security
@@ -64,7 +63,8 @@ async def home(request: Request):
 
 @app.post("/quiz", response_class=HTMLResponse)
 async def start_quiz(
-    request: Request, 
+    request: Request,
+    response: Response,
     sid: str = Form(...), 
     name: str = Form(...),
     professor: str = Form(...),
@@ -75,6 +75,9 @@ async def start_quiz(
     sid = sid.strip()
     if not sid.isdigit() or len(sid) != 9:
         return HTMLResponse("<h1>Invalid Student ID. Must be exactly 9 digits.</h1>", status_code=400)
+    
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
     
     questions = load_questions()
     return templates.TemplateResponse("quiz.html", {

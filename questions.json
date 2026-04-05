@@ -249,9 +249,9 @@
   },
   {
     "id": 32,
-    "question": "What is the average time complexity for HashSet.contains()?",
-    "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)"],
-    "answer": "O(1)",
+    "question": "If you add the string 'Java' to a HashSet three times in a row, how many elements will the set contain?",
+    "options": ["1", "2", "3", "0"],
+    "answer": "1",
     "category": "Java Collections Framework -HashSet",
     "tip": "A HashSet is a super-fast way to store unique items without duplicates. It is much faster than a standard list for checking if an item exists (O(1) complexity). In CS211, you will learn how to build your own version of this using Hashing (Ch18). Knowing when to use a Set instead of a List is a sign of a true intermediate programmer."
   },
