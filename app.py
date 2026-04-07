@@ -188,14 +188,27 @@ async def dashboard(request: Request):
 
     try:
         conn = get_db_connection()
+        # Fetch everything from DB
         df = pd.read_sql("SELECT * FROM assessment_results", conn)
         conn.close()
         
-        df = df.rename(columns={'name': 'Student_Name', 'score': 'Total_Score', 'professor': 'Professor', 'session': 'Session', 'quarter': 'Quarter', 'year': 'Year'})
+        # 1. Standardize column names for the logic/chart
+        # Note: We keep 'sid', 'status', 'quarter', 'year' available in the DF
+        df = df.rename(columns={
+            'name': 'Student_Name', 
+            'score': 'Total_Score', 
+            'status': 'Status',
+            'professor': 'Professor', 
+            'session': 'Session', 
+            'quarter': 'Quarter', 
+            'year': 'Year',
+            'sid': 'SID' 
+        })
         
         for col in ['Professor', 'Session', 'Quarter', 'Year']:
             df[col] = df[col].astype(str).str.strip()
 
+        # 2. Filter by the logged-in Professor
         df = df[df['Professor'] == str(prof_f).strip()]
 
         filters = {
@@ -204,10 +217,12 @@ async def dashboard(request: Request):
             "years": sorted(df['Year'].unique().tolist())
         }
 
+        # 3. Apply Dropdown Filters
         if sess_f: df = df[df['Session'] == sess_f.strip()]
         if qtr_f: df = df[df['Quarter'] == qtr_f.strip()]
         if yr_f: df = df[df['Year'] == yr_f.strip()]
 
+        # 4. Chart Logic (Keep as is)
         averages = {
             "Basic: loop/ for-each": round(df['loops'].mean() * 2, 1) if not df.empty else 0,
             "Basic: Method/parameter passing": round(df['methods'].mean() * 2, 1) if not df.empty else 0,
@@ -218,10 +233,16 @@ async def dashboard(request: Request):
             "Java Collections Framework -HashSet": round(df['hashset'].mean() * 2, 1) if not df.empty else 0,
             "Java Collections Framework -HashMap": round(df['hashmap'].mean() * 2, 1) if not df.empty else 0
         }
-        recent_students = df[['Student_Name', 'Total_Score']].tail(5).to_dict('records')
+
+        # 5. FIX: include ALL columns and remove .tail(5)
+        # We sort by ID descending so the newest are at the top, but we keep ALL of them.
+        all_students = df.sort_values(by='id', ascending=False).to_dict('records')
         
         return templates.TemplateResponse("admin.html", {
-            "request": request, "filters": filters, "averages": averages, "recent": recent_students,
+            "request": request, 
+            "filters": filters, 
+            "averages": averages, 
+            "recent": all_students, # Sending all filtered students
             "selections": {"prof": prof_f, "sess": sess_f, "qtr": qtr_f, "yr": yr_f},
             "total_students": len(df)
         })

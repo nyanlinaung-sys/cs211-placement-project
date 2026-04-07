@@ -116,22 +116,12 @@
                     <tbody>
                         {% for student in recent %}
                         <tr>
-                            <td class="fw-bold">{{ student.SID }}</td>
+                            <td>{{ student.SID }}</td>
                             <td>{{ student.Student_Name }}</td>
                             <td>{{ student.Quarter }}</td>
                             <td>{{ student.Year }}</td>
-                            <td class="text-center">
-                                <span class="badge bg-light text-dark border">{{ student.Total_Score }}/80</span>
-                            </td>
-                            <td class="text-center">
-                                {% if student.Status == 'Pass' %}
-                                    <span class="badge bg-success" style="width: 100px;">Pass</span>
-                                {% elif student.Status == 'Advice' %}
-                                    <span class="badge bg-warning text-dark" style="width: 100px;">Advice</span>
-                                {% else %}
-                                    <span class="badge bg-danger" style="width: 100px;">Failed</span>
-                                {% endif %}
-                            </td>
+                            <td>{{ student.Total_Score }}/80</td>
+                            <td>{{ student.Status }}</td>
                         </tr>
                         {% else %}
                         <tr>
