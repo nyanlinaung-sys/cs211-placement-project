@@ -105,7 +105,7 @@
                 <table class="table table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
-                            <th>SID</th>
+                            <th style="width: 50px;">#</th> <th>SID</th>
                             <th>Name</th>
                             <th>Quarter</th>
                             <th>Year</th>
@@ -116,24 +116,32 @@
                     <tbody>
                         {% for student in recent %}
                         <tr>
-                            <td>{{ student.SID }}</td>
+                            <td class="text-muted small">{{ loop.index }}</td> <td class="fw-bold">{{ student.SID }}</td>
                             <td>{{ student.Student_Name }}</td>
                             <td>{{ student.Quarter }}</td>
                             <td>{{ student.Year }}</td>
-                            <td>{{ student.Total_Score }}/80</td>
-                            <td>{{ student.Status }}</td>
+                            <td class="text-center">
+                                <span class="badge bg-light text-dark border">{{ student.Total_Score }}/80</span>
+                            </td>
+                            <td class="text-center">
+                                {% if "Pass" in student.Status %}
+                                    <span class="badge bg-success" style="width: 100px;">Pass</span>
+                                {% elif "Advice" in student.Status %}
+                                    <span class="badge bg-warning text-dark" style="width: 100px;">Advice</span>
+                                {% else %}
+                                    {# Matches Failed_Requirements and Failed_Score #}
+                                    <span class="badge bg-danger" style="width: 100px;">Failed</span>
+                                {% endif %}
+                            </td>
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="6" class="text-muted text-center py-5">
-                                <i class="bi bi-folder2-open d-block fs-2 mb-2"></i>
-                                No student records found for the selected filters.
-                            </td>
+                            <td colspan="7" class="text-muted text-center py-5">No student records found.</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
+            </div>         
         </div>
     </div>
 </div>
